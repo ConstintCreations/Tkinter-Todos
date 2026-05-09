@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "RP6_Tkinter_Todos"
+version = "0.0.1"
+dependencies = []
+
+[project.scripts]
+tkinter-todos = "RP6_Tkinter_Todos.main:main"

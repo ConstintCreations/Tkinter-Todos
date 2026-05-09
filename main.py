@@ -29,10 +29,13 @@ def add_task():
     if task_name:
         addName.delete(0, tk.END)
         listbox.insert(tk.END, f"☐ {task_name}")
+        listbox.focus()
         save()
 
 def toggle_completed_task():
     try:
+        if root.focus_get() == addName:
+            return
         listboxIndex = listbox.curselection()[0]
         itemText = listbox.get(listboxIndex)
         itemText = ("☑" if itemText[0] == "☐" else "☐") + itemText[1:]
@@ -45,6 +48,8 @@ def toggle_completed_task():
 
 def delete_task():
     try:
+        if root.focus_get() == addName:
+            return
         listboxIndex = listbox.curselection()[0]
         confirmDeletion = messagebox.askyesno("Confirm Deletion", f"Are you sure you want to delete the task: \"{listbox.get(listboxIndex)[2:]}\"?")
         if confirmDeletion:

@@ -68,6 +68,20 @@ root.rowconfigure(2, weight=1)
 
 name_var = tk.StringVar()
 
+root.bind("<Return>", lambda x: add_task())
+root.bind("T", lambda x: toggle_completed_task())
+root.bind("t", lambda x: toggle_completed_task())
+root.bind("X", lambda x: delete_task())
+root.bind("x", lambda x: delete_task())
+
+root.bind("a", lambda x: addName.focus())
+root.bind("A", lambda x: addName.focus())
+
+root.bind("l", lambda x: listbox.focus())
+root.bind("L", lambda x: listbox.focus())
+
+root.bind("<Escape>", lambda x: root.destroy())
+
 addFrame = tk.Frame(root, background="#333536")
 addFrame.grid(row=1, column=0, sticky="ew")
 
@@ -94,10 +108,10 @@ scrollbar.config(command=listbox.yview)
 actionsFrame = tk.Frame(root, background="#333536")
 actionsFrame.grid(row=3, column=0)
 
-completeButton = tk.Button(actionsFrame, text="Toggle", command=toggle_completed_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
+completeButton = tk.Button(actionsFrame, text="[T] Toggle", command=toggle_completed_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
 completeButton.pack(side="left", padx=(0, 50))
 
-deleteButton = tk.Button(actionsFrame, text="Delete", command=delete_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
+deleteButton = tk.Button(actionsFrame, text="[X] Delete", command=delete_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
 deleteButton.pack(side="right", padx=(50, 0))
 
 initializeTasks()

@@ -58,6 +58,17 @@ def delete_task():
     except:
         return
     
+def clear_tasks():
+    try:
+        if root.focus_get() == addName:
+            return
+        confirmClear = messagebox.askyesno("Confirm Clear", f"Are you sure you want to clear all tasks?")
+        if confirmClear:
+            listbox.delete(0, tk.END)
+            save()
+    except:
+        return
+    
 def initializeTasks():
     tasks = load_tasks()
     for task in tasks:
@@ -78,6 +89,8 @@ root.bind("T", lambda x: toggle_completed_task())
 root.bind("t", lambda x: toggle_completed_task())
 root.bind("X", lambda x: delete_task())
 root.bind("x", lambda x: delete_task())
+root.bind("C", lambda x: clear_tasks())
+root.bind("c", lambda x: clear_tasks())
 
 root.bind("a", lambda x: addName.focus())
 root.bind("A", lambda x: addName.focus())
@@ -111,13 +124,20 @@ listbox.pack(side="left", fill="both", expand=True)
 scrollbar.config(command=listbox.yview)
 
 actionsFrame = tk.Frame(root, background="#333536")
-actionsFrame.grid(row=3, column=0)
+actionsFrame.grid(row=3, column=0, sticky="ew")
+
+actionsFrame.columnconfigure(0, weight=1)
+actionsFrame.columnconfigure(1, weight=1)
+actionsFrame.columnconfigure(2, weight=1)
 
 completeButton = tk.Button(actionsFrame, text="[T] Toggle", command=toggle_completed_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
-completeButton.pack(side="left", padx=(0, 50))
+completeButton.grid(row=0, column=0)
 
 deleteButton = tk.Button(actionsFrame, text="[X] Delete", command=delete_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
-deleteButton.pack(side="right", padx=(50, 0))
+deleteButton.grid(row=0, column=1)
+
+completeButton = tk.Button(actionsFrame, text="[C] Clear", command=clear_tasks, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
+completeButton.grid(row=0, column=2)
 
 initializeTasks()
 

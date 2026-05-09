@@ -14,12 +14,22 @@ def save_tasks(tasks):
     with open(TASKS_FILE, "w") as file:
         json.dump(tasks, file, indent=4)
 
+def save():
+    listBoxTasks = list(listbox.get(0, tk.END))
+    tasks = []
+    for listBoxTask in listBoxTasks:
+        done = listBoxTask[0] == "☑"
+        text = listBoxTask[2:]
+        tasks.append({"done": done, "text": text})
+
+    save_tasks(tasks)
+
 def add_task():
     task_name = name_var.get()
     if task_name:
         addName.delete(0, tk.END)
         listbox.insert(tk.END, f"☐ {task_name}")
-    return
+        save()
 
 def toggle_completed_task():
     try:
@@ -29,6 +39,7 @@ def toggle_completed_task():
         listbox.delete(listboxIndex)
         listbox.insert(listboxIndex, itemText)
         listbox.selection_set(listboxIndex)
+        save()
     except:
         return
 
@@ -38,8 +49,14 @@ def delete_task():
         confirmDeletion = messagebox.askyesno("Confirm Deletion", f"Are you sure you want to delete the task: \"{listbox.get(listboxIndex)[2:]}\"?")
         if confirmDeletion:
             listbox.delete(listboxIndex)
+            save()
     except:
         return
+    
+def initializeTasks():
+    tasks = load_tasks()
+    for task in tasks:
+        listbox.insert(tk.END, ("☑ " if task["done"] else "☐ ") + task["text"])
 
 root = tk.Tk()
 root.title("Tkinter Todos")

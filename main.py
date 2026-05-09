@@ -18,9 +18,18 @@ def add_task():
     return
 
 def toggle_completed_task():
-    return
+    try:
+        listboxIndex = listbox.curselection()[0]
+        itemText = listbox.get(listboxIndex)
+        itemText = ("☑" if itemText[0] == "☐" else "☐") + itemText[1:]
+        listbox.delete(listboxIndex)
+        listbox.insert(listboxIndex, itemText)
+        listbox.selection_set(listboxIndex)
+    except:
+        return
 
 def delete_task():
+    
     return
 
 root = tk.Tk()

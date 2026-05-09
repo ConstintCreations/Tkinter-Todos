@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import json, os
 
 TASKS_FILE = "tasks.json"
@@ -29,8 +30,13 @@ def toggle_completed_task():
         return
 
 def delete_task():
-    
-    return
+    try:
+        listboxIndex = listbox.curselection()[0]
+        confirmDeletion = messagebox.askyesno("Confirm Deletion", f"Are you sure you want to delete the task: \"{listbox.get(listboxIndex)[2:]}\"?")
+        if confirmDeletion:
+            listbox.delete(listboxIndex)
+    except:
+        return
 
 root = tk.Tk()
 root.title("Tkinter Todos")

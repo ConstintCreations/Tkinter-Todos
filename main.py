@@ -95,9 +95,6 @@ root.bind("c", lambda x: clear_tasks())
 root.bind("a", lambda x: addName.focus())
 root.bind("A", lambda x: addName.focus())
 
-root.bind("l", lambda x: listbox.focus())
-root.bind("L", lambda x: listbox.focus())
-
 root.bind("<Escape>", lambda x: root.destroy())
 
 addFrame = tk.Frame(root, background="#333536")

@@ -17,6 +17,12 @@ def add_task():
     print(name_var.get())
     return
 
+def toggle_completed_task():
+    return
+
+def delete_task():
+    return
+
 root = tk.Tk()
 root.title("Tkinter Todos")
 root.geometry("400x300")
@@ -36,8 +42,8 @@ title.grid(row=0, column=0)
 addName = tk.Entry(addFrame, foreground="#f5f5f5", background="#484B4D", insertbackground="#f5f5f5", font=("Arial", 14, "bold"), textvariable=name_var)
 addName.pack(side="left", fill="x", expand=True, padx=(10, 0))
 
-button = tk.Button(addFrame, text="+", command=add_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 30, "bold"))
-button.pack(side="right")
+addButton = tk.Button(addFrame, text="+", command=add_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 30, "bold"))
+addButton.pack(side="right")
 
 listFrame = tk.Frame(root, background="#333536",)
 listFrame.grid(row=2, column=0, sticky="nsew")
@@ -51,6 +57,15 @@ listbox.pack(side="left", fill="both", expand=True)
 scrollbar.config(command=listbox.yview)
 
 for i in range(50):
-    listbox.insert(tk.END, f"Item {i+1}")
+    listbox.insert(tk.END, f"☐ Item {i+1}") # ☐ ☑
+
+actionsFrame = tk.Frame(root, background="#333536")
+actionsFrame.grid(row=3, column=0)
+
+completeButton = tk.Button(actionsFrame, text="Toggle", command=toggle_completed_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
+completeButton.pack(side="left", padx=(0, 50))
+
+deleteButton = tk.Button(actionsFrame, text="Delete", command=delete_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 16, "bold"))
+deleteButton.pack(side="right", padx=(50, 0))
 
 root.mainloop()

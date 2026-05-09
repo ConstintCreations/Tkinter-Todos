@@ -14,6 +14,7 @@ def save_tasks(tasks):
         json.dump(tasks, file, indent=4)
 
 def add_task():
+    print(name_var.get())
     return
 
 root = tk.Tk()
@@ -22,24 +23,29 @@ root.geometry("400x300")
 root.configure(background="#333536")
 
 root.columnconfigure(0, weight=1)
-root.rowconfigure(1, weight=1)
+root.rowconfigure(2, weight=1)
 
-titlebar = tk.Frame(root, background="#333536")
-titlebar.grid(row=0, column=0)
+name_var = tk.StringVar()
 
-title = tk.Label(titlebar, text="Todos", font=("Arial", 24, "bold"), height=2, foreground="#f5f5f5", background="#333536")
-title.pack(side="left")
+addFrame = tk.Frame(root, background="#333536")
+addFrame.grid(row=1, column=0, sticky="ew")
 
-button = tk.Button(titlebar, text="+", command=add_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 24, "bold"))
+title = tk.Label(root, text="Todos", font=("Arial", 24, "bold"), height=2, foreground="#f5f5f5", background="#333536")
+title.grid(row=0, column=0)
+
+addName = tk.Entry(addFrame, foreground="#f5f5f5", background="#484B4D", insertbackground="#f5f5f5", font=("Arial", 14, "bold"), textvariable=name_var)
+addName.pack(side="left", fill="x", expand=True, padx=(10, 0))
+
+button = tk.Button(addFrame, text="+", command=add_task, foreground="#f5f5f5", background="#333536", activeforeground="#f5f5f5", activebackground="#333536", bd=0, cursor="hand2", font=("Arial", 30, "bold"))
 button.pack(side="right")
 
 listFrame = tk.Frame(root, background="#333536",)
-listFrame.grid(row=1, column=0, sticky="nsew")
+listFrame.grid(row=2, column=0, sticky="nsew")
 
 scrollbar = tk.Scrollbar(listFrame, background="#333536")
 scrollbar.pack(side="right", fill="y")
 
-listbox = tk.Listbox(listFrame, yscrollcommand=scrollbar.set, foreground="#f5f5f5", background="#333536", bd=0)
+listbox = tk.Listbox(listFrame, yscrollcommand=scrollbar.set, foreground="#f5f5f5", background="#333536", bd=0, font=("Arial", 12, "bold"))
 listbox.pack(side="left", fill="both", expand=True)
 
 scrollbar.config(command=listbox.yview)

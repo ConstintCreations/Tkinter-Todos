@@ -14,6 +14,8 @@ To install, you can use
 pip install -i https://test.pypi.org/simple/ RP6-Tkinter-Todos
 ```
 
+Run with `tkinter-todos`
+
 ## Keyboard Shortcuts
 
 Esc - Exit <br>
